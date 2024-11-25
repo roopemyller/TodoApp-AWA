@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function (){
             const response = await fetch('/add', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name, todo})
+                body: JSON.stringify({name: name, todo: todo})
             })
     
             if (response.ok) {
