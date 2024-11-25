@@ -1,6 +1,5 @@
 import router from "./src/index"
 import express, {Express} from "express"
-import bodyParser from 'body-parser'
 import morgan from "morgan"
 import path from "path"
 

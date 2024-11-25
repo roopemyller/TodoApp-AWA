@@ -30,11 +30,12 @@ const saveTodos = (todos: TUser[]): void => {
 }
 
 router.post('/add', (req, res) => {
+    console.log(req.body)
     const { name, todo } = req.body
 
     let todos = loadTodos()
     const user = todos.find((user) => user.name === name)
-    
+
     if(user){
         user.todos.push(todo)
     }else{

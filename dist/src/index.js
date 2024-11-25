@@ -27,6 +27,7 @@ const saveTodos = (todos) => {
     }
 };
 router.post('/add', (req, res) => {
+    console.log(req.body);
     const { name, todo } = req.body;
     let todos = loadTodos();
     const user = todos.find((user) => user.name === name);
