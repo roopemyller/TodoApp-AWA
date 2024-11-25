@@ -5,12 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
 const router = (0, express_1.Router)();
-const TODOS_FILE = path_1.default.resolve(__dirname, '../data.json');
 const loadTodos = () => {
     try {
-        const data = fs_1.default.readFileSync(TODOS_FILE, 'utf-8');
+        const data = fs_1.default.readFileSync("data.json", 'utf-8');
         return JSON.parse(data);
     }
     catch (err) {
@@ -20,7 +18,7 @@ const loadTodos = () => {
 };
 const saveTodos = (todos) => {
     try {
-        fs_1.default.writeFileSync(TODOS_FILE, JSON.stringify(todos, null, 2), 'utf-8');
+        fs_1.default.writeFileSync("data.json", JSON.stringify(todos, null, 2), 'utf-8');
     }
     catch (err) {
         console.error(`Error writing the todo file: `, err);

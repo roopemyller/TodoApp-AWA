@@ -9,11 +9,10 @@ type TUser = {
 
 const router: Router = Router()
 
-const TODOS_FILE = path.resolve(__dirname, '../data.json');
 
 const loadTodos = (): TUser[] => {
     try {
-        const data = fs.readFileSync(TODOS_FILE, 'utf-8')
+        const data = fs.readFileSync("data.json", 'utf-8')
         return JSON.parse(data) as TUser[]
     } catch (err){
         console.error(`Error reading or parsing the todo file: `, err)
@@ -23,7 +22,7 @@ const loadTodos = (): TUser[] => {
 
 const saveTodos = (todos: TUser[]): void => {
     try {
-        fs.writeFileSync(TODOS_FILE, JSON.stringify(todos, null, 2), 'utf-8')
+        fs.writeFileSync("data.json", JSON.stringify(todos, null, 2), 'utf-8')
     } catch (err){
         console.error(`Error writing the todo file: `, err)
     }
