@@ -68,12 +68,12 @@ document.addEventListener("DOMContentLoaded", function (){
                             return response.text()
                         })
                         .then(message => {
-                            messageElement.textContent = message
+                            alert(message)                            
                             const todoList = document.getElementById('todoList')
                             todoList.removeChild(li)
                         })
                         .catch(error => {
-                            messageElement.textContent = error.message
+                            alert(error.message)
                         })
                     })
                 })
