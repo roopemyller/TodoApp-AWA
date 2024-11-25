@@ -40,8 +40,19 @@ router.post('/add', (req, res) => {
     saveTodos(todos);
     res.send(`Todo added successfully for user ${name}`);
 });
-router.get('/list', (req, res) => {
+router.get('/todos', (req, res) => {
     let todos = loadTodos();
     res.status(200).json({ todos });
+});
+router.get('/todos/:id', (req, res) => {
+    let userId = req.params.id;
+    let todos = loadTodos();
+    const user = todos.find((user) => user.name.toLowerCase() === userId.toLowerCase());
+    if (user) {
+        res.status(200).json(user.todos);
+    }
+    else {
+        res.status(404).send("User not found");
+    }
 });
 exports.default = router;
