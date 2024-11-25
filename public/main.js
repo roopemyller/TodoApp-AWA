@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function (){
                         .then(message => {
                             alert(message)
                             const todoList = document.getElementById('todoList')
-                            todoList.removeChild(todoList.children[index])
+                            todoList.removeChild(li)
                         })
                         .catch(error => {
                             alert(error.message)
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function (){
             })
             .catch(error => {
                 messageElement.textContent = error.message;
-            });
+            })
     } else {
         messageElement.textContent = "Please enter a username.";
     }
