@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
                 const deleteButton = document.createElement('button')
                 deleteButton.textContent = "Delete User"
-                deleteButton.id = "deleteButton"
+                deleteButton.id = "deleteUser"
                 constDiv.appendChild(deleteButton)
                 
                 deleteButton.addEventListener('click', function () {
