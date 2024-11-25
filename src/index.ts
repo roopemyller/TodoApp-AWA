@@ -9,7 +9,7 @@ type TUser = {
 
 const router: Router = Router()
 
-const TODOS_FILE = path.resolve(__dirname, '../..', 'data', 'todos.json');
+const TODOS_FILE = path.resolve(__dirname, '../todos.json');
 
 const loadTodos = (): TUser[] => {
     try {
