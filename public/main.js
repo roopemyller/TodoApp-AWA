@@ -52,10 +52,10 @@ document.addEventListener("DOMContentLoaded", function (){
                 });
             })
             .catch(error => {
-                errorMessage.textContent = error.message;
+                messageElement.textContent = error.message;
             });
     } else {
-        errorMessage.textContent = "Please enter a username.";
+        messageElement.textContent = "Please enter a username.";
     }
     })
 })
