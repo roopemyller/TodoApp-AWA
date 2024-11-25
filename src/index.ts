@@ -66,4 +66,19 @@ router.get('/todos/:id', (req, res) => {
     }
 })
 
+router.delete('/delete', (req, res) => {
+    const {name} = req.body
+    let todos = loadTodos()
+
+    const userIndex = todos.findIndex((user) => user.name.toLowerCase() === name.toLowerCase())
+
+    if (userIndex !== -1){
+        todos.splice(userIndex, 1)
+        saveTodos(todos)
+        res.status(200).send("User deleted successfully")
+    }else{
+        res.status(404).send("User not found")
+    }
+})
+
 export default router

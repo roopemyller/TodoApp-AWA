@@ -14,18 +14,18 @@ document.addEventListener("DOMContentLoaded", function (){
             })
     
             if (response.ok) {
-                const message = await response.text();
-                messageElement.textContent = message;
-                messageElement.style.color = 'green';
+                const message = await response.text()
+                messageElement.textContent = message
+                messageElement.style.color = 'green'
             } else {
-                messageElement.textContent = 'Failed to add todo!';
-                messageElement.style.color = 'red';
+                messageElement.textContent = 'Failed to add todo!'
+                messageElement.style.color = 'red'
             }
             todoForm.reset()
         }catch (error){
             console.error('Error:', error)
-            messageElement.textContent = 'An error occurred!';
-            messageElement.style.color = 'red';
+            messageElement.textContent = 'An error occurred!'
+            messageElement.style.color = 'red'
         }
     }),
     document.getElementById("searchForm").addEventListener('submit', function (e) {
@@ -41,15 +41,44 @@ document.addEventListener("DOMContentLoaded", function (){
         if (userId){
             fetch(`/todos/${userId}`).then(response => {
                 if (!response.ok) {
-                    throw new Error("User not found");
+                    throw new Error("User not found")
                 }
-                return response.json();
+                return response.json()
             }).then(todos => {
                 todos.forEach(todo => {
-                    const li = document.createElement('li');
-                    li.textContent = todo;
-                    todoList.appendChild(li);
-                });
+                    const li = document.createElement('li')
+                    li.textContent = todo
+                    todoList.appendChild(li)
+                })
+                const constDiv = document.getElementById("todoDiv")
+
+                const deleteButton = document.createElement('button')
+                deleteButton.textContent = "Delete User"
+                deleteButton.id = "deleteButton"
+                constDiv.appendChild(deleteButton)
+                
+                deleteButton.addEventListener('click', function () {
+                    fetch('/delete', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name: userId })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Error deleting user");
+                        }
+                        return response.text()
+                    })
+                    .then(message => {
+                        messageElement.textContent = message;
+                        todoList.innerHTML = ''
+                    })
+                    .catch(error => {
+                        messageElement.textContent = error.message
+                    })
+                })
             })
             .catch(error => {
                 messageElement.textContent = error.message;
