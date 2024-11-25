@@ -47,8 +47,35 @@ document.addEventListener("DOMContentLoaded", function (){
             }).then(todos => {
                 todos.forEach(todo => {
                     const li = document.createElement('li')
-                    li.textContent = todo
+                    const a = document.createElement('a')
+                    a.href = "#"
+                    a.classList.add('delete-task')
+                    a.textContent = todo
+                    li.appendChild(a)
                     todoList.appendChild(li)
+                    a.addEventListener('click', function() {
+                        fetch('/update', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ name: userId, todo: todo })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Error deleting todo')
+                            }
+                            return response.text()
+                        })
+                        .then(message => {
+                            alert(message)
+                            const todoList = document.getElementById('todoList')
+                            todoList.removeChild(todoList.children[index])
+                        })
+                        .catch(error => {
+                            alert(error.message)
+                        })
+                    })
                 })
                 const constDiv = document.getElementById("todoDiv")
 
@@ -87,4 +114,8 @@ document.addEventListener("DOMContentLoaded", function (){
         messageElement.textContent = "Please enter a username.";
     }
     })
+    function displayTodos(user){
+        const todoList = document.getElementById("todoList")
+        todoList.innerHTML = ''
+    }
 })

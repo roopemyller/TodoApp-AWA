@@ -68,4 +68,17 @@ router.delete('/delete', (req, res) => {
         res.status(404).send("User not found");
     }
 });
+router.put("/update", (req, res) => {
+    const { name, todo } = req.body;
+    let todos = loadTodos();
+    const user = todos.find((user) => user.name.toLowerCase() === name.toLowerCase());
+    if (user) {
+        const todoIndex = user.todos.indexOf(todo);
+        if (todoIndex !== -1) {
+            user.todos.splice(todoIndex, 1);
+        }
+        saveTodos(todos);
+        res.status(200).send("Todo deleted successfully");
+    }
+});
 exports.default = router;
