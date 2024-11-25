@@ -7,7 +7,7 @@ const express_1 = require("express");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const router = (0, express_1.Router)();
-const TODOS_FILE = path_1.default.resolve(__dirname, '../todos.json');
+const TODOS_FILE = path_1.default.resolve(__dirname, '../data.json');
 const loadTodos = () => {
     try {
         const data = fs_1.default.readFileSync(TODOS_FILE, 'utf-8');
