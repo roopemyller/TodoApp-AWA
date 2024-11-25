@@ -68,12 +68,12 @@ document.addEventListener("DOMContentLoaded", function (){
                             return response.text()
                         })
                         .then(message => {
-                            alert(message)
+                            messageElement.textContent = message
                             const todoList = document.getElementById('todoList')
                             todoList.removeChild(li)
                         })
                         .catch(error => {
-                            alert(error.message)
+                            messageElement.textContent = error.message
                         })
                     })
                 })
@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function (){
                     .catch(error => {
                         messageElement.textContent = error.message
                     })
+                    constDiv.removeChild(deleteButton)
                 })
             })
             .catch(error => {
